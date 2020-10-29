@@ -40,9 +40,12 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.handler = handler;
     }
 
+    static {
+        ApiContextInitializer.init();
+    }
+
     @PostConstruct
     public void initialize() {
-        ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         RequestConfig requestConfig = RequestConfig.custom()
                 .setSocketTimeout(TIMEOUT)
@@ -81,11 +84,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return botToken;
+        return botUsername;
     }
 
     @Override
     public String getBotToken() {
-        return botUsername;
+        return botToken;
     }
 }
