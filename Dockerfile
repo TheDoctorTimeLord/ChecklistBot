@@ -25,5 +25,11 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
+# Copy scripts
+COPY ./set-datasorce.sh /set-datasorce.sh
+COPY ./start-app.sh /start-app.sh
+RUN ["chmod", "+x", "/set-datasorce.sh"]
+RUN ["chmod", "+x", "/start-app.sh"]
+
 # Run the Spring boot application
-ENTRYPOINT ["java", "-cp", "app:app/lib/*", "com.bot.checklistbot.configs.ChecklistBotApplication"]
+ENTRYPOINT ["sh", "/start-app.sh"]
