@@ -8,14 +8,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.bot.checklistbot.serviceclasses.Constants.Bot;
+import com.bot.checklistbot.serviceclasses.Constants.Package;
+
 /**
  * Spring конфигурации для запуска приложения
  */
 @Configuration
-@PropertySource("classpath:bot.properties")
-@ComponentScan(basePackages = {"com.bot.checklistbot"})
-@EnableJpaRepositories("com.bot.checklistbot")
-@EntityScan("com.bot.checklistbot")
+@PropertySource(Bot.BOT_PROPERTIES)
+@ComponentScan(basePackages = { Package.BASE_PACKAGE })
+@EnableJpaRepositories(Package.BASE_PACKAGE)
+@EntityScan(Package.BASE_PACKAGE)
 @EnableAutoConfiguration
 public class ChecklistBotApplication {
 

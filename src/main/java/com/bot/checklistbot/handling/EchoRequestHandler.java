@@ -1,9 +1,10 @@
 package com.bot.checklistbot.handling;
 
+import org.springframework.stereotype.Component;
+
 import com.bot.checklistbot.bot.BotMessage;
 import com.bot.checklistbot.bot.BotResponse;
 import com.bot.checklistbot.bot.RequestHandler;
-import org.springframework.stereotype.Component;
 
 /**
  * Простейшая имплементация класса {@link RequestHandler}
