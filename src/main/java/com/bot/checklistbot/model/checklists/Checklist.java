@@ -1,11 +1,20 @@
 package com.bot.checklistbot.model.checklists;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.bot.checklistbot.model.userstate.UserData;
 
 /**
- * Сущность, описывающая чеклист пользователя.
+ * Сущность, описывающая чеклист (список дел) пользователя.
  * Title - название чеклиста, Capture - описание чеклиста, Items - набор пунктов в чеклисте.
  */
 @Entity
@@ -19,7 +28,10 @@ public class Checklist
     @Column
     private String capture;
     @OneToMany(mappedBy = "checklist")
-    private final List<ChecklistItem> items = new ArrayList<>();
+    private final Set<ChecklistItem> items = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "userdata_id")
+    private UserData owner;
 
 
     public Checklist() {}
@@ -35,6 +47,11 @@ public class Checklist
 
     public String getTitle() {
         return title;
+    }
+
+    public void setOwner(UserData owner)
+    {
+        this.owner = owner;
     }
 
     public void setTitle(String title) {

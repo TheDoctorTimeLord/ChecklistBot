@@ -19,7 +19,7 @@ public interface ChecklistService
      *
      * @param checklist новые данные чеклиста
      */
-    void save(Checklist checklist);
+    Checklist save(Checklist checklist);
 
     /**
      * Метод удаления {@link Checklist чеклиста} из базы данных.
