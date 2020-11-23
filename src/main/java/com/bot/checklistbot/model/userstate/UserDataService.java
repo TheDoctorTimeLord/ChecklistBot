@@ -29,9 +29,8 @@ public interface UserDataService
      *
      * @param userData пользователь, которому добавляется список дел
      * @param checklist список дел, добавляемый пользователю
-     * @return добавленный список дел
      */
-    Checklist addChecklist(UserData userData, Checklist checklist);
+    void addChecklist(UserData userData, Checklist checklist);
 
     /**
      * Удаляет {@link Checklist список дел} пользователя
@@ -40,4 +39,11 @@ public interface UserDataService
      * @param checklist удаляемый список дел
      */
     void deleteChecklist(UserData userData, Checklist checklist);
+
+    /**
+     * Изменяет текущее состояние пользователя на новое
+     * @param userData пользователь, которому изменяют состояние
+     * @param userState новое состояние
+     */
+    void changeUserState(UserData userData, UserState userState);
 }

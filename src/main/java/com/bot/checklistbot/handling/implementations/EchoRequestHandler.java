@@ -1,10 +1,13 @@
-package com.bot.checklistbot.handling;
+package com.bot.checklistbot.handling.implementations;
+
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.bot.checklistbot.bot.BotMessage;
 import com.bot.checklistbot.bot.BotResponse;
-import com.bot.checklistbot.bot.RequestHandler;
+import com.bot.checklistbot.handling.RequestHandler;
 
 /**
  * Простейшая имплементация класса {@link RequestHandler}
@@ -13,9 +16,9 @@ import com.bot.checklistbot.bot.RequestHandler;
 public class EchoRequestHandler implements RequestHandler {
     @Override
     public BotResponse handle(BotMessage message) {
-        String[] result = message.getMessage() == null
-                ? new String[0]
-                : new String[] {message.getMessage()};
+        List<String> result = message.getMessage() == null
+                ? Collections.emptyList()
+                : Collections.singletonList(message.getMessage());
         return new BotResponse(message.getUserId(), result);
     }
 }

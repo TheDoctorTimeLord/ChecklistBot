@@ -1,12 +1,17 @@
 package com.bot.checklistbot.handling;
 
-import com.bot.checklistbot.bot.BotMessage;
-import com.bot.checklistbot.bot.BotResponse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+
+import java.util.Collections;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.bot.checklistbot.bot.BotMessage;
+import com.bot.checklistbot.bot.BotResponse;
+import com.bot.checklistbot.handling.implementations.EchoRequestHandler;
 
 class EchoRequestHandlerTest {
     private EchoRequestHandler handler;
@@ -25,7 +30,7 @@ class EchoRequestHandlerTest {
         BotResponse response = handler.handle(message);
 
         assertEquals(userId, response.getUserId());
-        assertArrayEquals(new String[] {messageText}, response.getResponse());
+        assertIterableEquals(Collections.singletonList(messageText), response.getResponse());
     }
 
     @Test
@@ -36,6 +41,6 @@ class EchoRequestHandlerTest {
         BotResponse response = handler.handle(message);
 
         assertEquals(userId, response.getUserId());
-        assertArrayEquals(new String[0], response.getResponse());
+        Assertions.assertIterableEquals(Collections.emptyList(), response.getResponse());
     }
 }

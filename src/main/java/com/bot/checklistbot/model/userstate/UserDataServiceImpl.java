@@ -35,27 +35,38 @@ public class UserDataServiceImpl implements UserDataService
     }
 
     @Override
-    public void update(UserData registration)
+    @Transactional
+    public void update(UserData userData)
     {
-        repository.save(registration);
+        repository.save(userData);
     }
 
     @Override
-    public Checklist addChecklist(UserData userData, Checklist checklist)
+    @Transactional
+    public void addChecklist(UserData userData, Checklist checklist)
     {
         userData.addChecklists(checklist);
         checklist.setOwner(userData);
 
         repository.save(userData);
-        return checklistService.save(checklist);
+        checklistService.save(checklist);
     }
 
     @Override
+    @Transactional
     public void deleteChecklist(UserData userData, Checklist checklist)
     {
         userData.deleteChecklist(checklist);
 
         repository.save(userData);
         checklistService.delete(checklist);
+    }
+
+    @Override
+    @Transactional
+    public void changeUserState(UserData userData, UserState userState)
+    {
+        userData.setState(userState);
+        repository.save(userData);
     }
 }

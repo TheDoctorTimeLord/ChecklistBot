@@ -15,6 +15,13 @@ public interface ChecklistService
     Checklist find(long id);
 
     /**
+     * Осуществляет поиск списка по его названию
+     * @param title название списка
+     * @return списка
+     */
+    Checklist findByTitle(String title);
+
+    /**
      * Обновляет данные о чеклисте в базе данных
      *
      * @param checklist новые данные чеклиста

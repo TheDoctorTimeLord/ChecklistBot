@@ -24,9 +24,9 @@ public class ChecklistItem
 
     public ChecklistItem() {}
 
-    public ChecklistItem(String capture, boolean state) {
+    public ChecklistItem(String capture) {
         this.capture = capture;
-        this.state = state;
+        this.state = true;
     }
 
     public long getId() {

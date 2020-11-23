@@ -1,4 +1,7 @@
-package com.bot.checklistbot.bot;
+package com.bot.checklistbot.handling;
+
+import com.bot.checklistbot.bot.BotMessage;
+import com.bot.checklistbot.bot.BotResponse;
 
 /**
  * Интерфейс, описывающий поведение обработчика сообщений от бота

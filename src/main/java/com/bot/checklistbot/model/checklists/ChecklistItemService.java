@@ -15,6 +15,13 @@ public interface ChecklistItemService
     ChecklistItem find(long id);
 
     /**
+     * Осуществляет поиск пункта списка по его описанию
+     * @param capture описание списка
+     * @return элемент списка
+     */
+    ChecklistItem findByCapture(String capture);
+
+    /**
      * Обновляет данные о пункте в базе данных
      *
      * @param checklistItem новые данные пункта
@@ -27,4 +34,10 @@ public interface ChecklistItemService
      * @param checklistItem пункт
      */
     void delete(ChecklistItem checklistItem);
+
+    /**
+     * Удаляет все пункты из списка
+     * @param checklist список, из которого будут удалены пункты
+     */
+    void deleteFrom(Checklist checklist);
 }

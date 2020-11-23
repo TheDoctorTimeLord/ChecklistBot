@@ -3,9 +3,9 @@ package com.bot.checklistbot.model.userstate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -22,16 +22,16 @@ public class UserData
 {
     @Id
     private long id;
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UserStateConverter.class)
     private UserState state;
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private final List<Checklist> checklists = new ArrayList<>();
 
     public UserData() {}
 
     public UserData(long id) {
         this.id = id;
-        this.state = UserState.START;
+        this.state = new UserState();
     }
 
     public long getId() {
@@ -46,15 +46,15 @@ public class UserData
         return checklists;
     }
 
-    public void setState(UserState state) {
+    void setState(UserState state) {
         this.state = state;
     }
 
-    public void addChecklists(Checklist checklist) {
+    void addChecklists(Checklist checklist) {
         checklists.add(checklist);
     }
 
-    public void deleteChecklist(Checklist checklist) {
+    void deleteChecklist(Checklist checklist) {
         checklists.remove(checklist);
     }
 }

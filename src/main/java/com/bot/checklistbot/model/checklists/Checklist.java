@@ -1,10 +1,11 @@
 package com.bot.checklistbot.model.checklists;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,8 +28,8 @@ public class Checklist
     private String title;
     @Column
     private String capture;
-    @OneToMany(mappedBy = "checklist")
-    private final Set<ChecklistItem> items = new HashSet<>();
+    @OneToMany(mappedBy = "checklist", fetch = FetchType.EAGER)
+    private final List<ChecklistItem> items = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "userdata_id")
     private UserData owner;
@@ -49,21 +50,29 @@ public class Checklist
         return title;
     }
 
-    public void setOwner(UserData owner)
-    {
-        this.owner = owner;
+    public String getCapture() {
+        return capture;
+    }
+
+    public UserData getOwner() {
+        return owner;
+    }
+
+    public List<ChecklistItem> getItems() {
+        return items;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getCapture() {
-        return capture;
-    }
-
     public void setCapture(String capture) {
         this.capture = capture;
+    }
+
+    public void setOwner(UserData owner)
+    {
+        this.owner = owner;
     }
 
     public void addItem(ChecklistItem checklistItem) {

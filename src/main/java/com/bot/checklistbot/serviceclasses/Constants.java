@@ -33,4 +33,21 @@ public interface Constants {
          */
         String BASE_PACKAGE = "com.bot.checklistbot";
     }
+
+    /**
+     * Коды команд
+     */
+    interface Commands {
+        String EXCEPTION_COMMAND_CODE = "exceptionCommand";
+        String VIEW_CHECKLIST_COMMAND_CODE = "Показать";
+        String ADD_CHECKLIST_COMMAND_CODE = "Добавить список";
+        String EDIT_CHECKLIST_COMMAND_CODE = "Изменить список";
+        String DELETE_CHECKLIST_COMMAND_CODE = "Удалить список";
+        String ADD_CHECKLIST_ITEM_COMMAND_CODE = "Добавить пункт";
+        String DELETE_CHECKLIST_ITEM_COMMAND_CODE = "Удалить пункт";
+        String VIEW_CHECKLIST_ITEM_COMMAND_CODE = "Показать пункт";
+        String CHANGE_CHECKLIST_ITEM_COMMAND_CODE = "Изменить";
+        String BACK_MENU_COMMAND_CODE = "Назад";
+        String LIST_COMMAND_CODE = "Команды";
+    }
 }

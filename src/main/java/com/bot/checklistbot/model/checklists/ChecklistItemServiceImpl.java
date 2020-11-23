@@ -1,10 +1,10 @@
 package com.bot.checklistbot.model.checklists;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * Реализация {@link ChecklistItemService}
@@ -28,6 +28,12 @@ public class ChecklistItemServiceImpl implements ChecklistItemService {
 
     @Override
     @Transactional
+    public ChecklistItem findByCapture(String capture) {
+        return repository.findByCapture(capture);
+    }
+
+    @Override
+    @Transactional
     public void save(ChecklistItem checklistItem) {
         repository.save(checklistItem);
     }
@@ -36,5 +42,11 @@ public class ChecklistItemServiceImpl implements ChecklistItemService {
     @Transactional
     public void delete(ChecklistItem checklistItem) {
         repository.delete(checklistItem);
+    }
+
+    @Override
+    @Transactional
+    public void deleteFrom(Checklist checklist) {
+        repository.deleteAll(checklist.getItems());
     }
 }
