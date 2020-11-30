@@ -40,4 +40,9 @@ public interface ChecklistItemService
      * @param checklist список, из которого будут удалены пункты
      */
     void deleteFrom(Checklist checklist);
+
+    /**
+     * Получение всех пунктов всех списков всех пользователей
+     */
+    Iterable<ChecklistItem> getAll();
 }

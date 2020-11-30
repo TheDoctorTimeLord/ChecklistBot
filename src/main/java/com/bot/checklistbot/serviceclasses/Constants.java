@@ -49,5 +49,10 @@ public interface Constants {
         String CHANGE_CHECKLIST_ITEM_COMMAND_CODE = "Изменить";
         String BACK_MENU_COMMAND_CODE = "Назад";
         String LIST_COMMAND_CODE = "Команды";
+        String DELIMITER = "!";
+    }
+
+    interface Schedule {
+        String TIME_ZONE = "Asia/Yekaterinburg";
     }
 }

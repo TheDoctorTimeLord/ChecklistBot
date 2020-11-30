@@ -1,9 +1,5 @@
 package com.bot.checklistbot.handling.commands.checklist;
 
-import java.util.Collections;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.bot.checklistbot.bot.BotResponse;
 import com.bot.checklistbot.handling.BotCommand;
 import com.bot.checklistbot.handling.Command;
@@ -17,6 +13,9 @@ import com.bot.checklistbot.serviceclasses.LocalizedText;
 import com.bot.checklistbot.serviceclasses.UserStateMenu;
 import com.bot.checklistbot.serviceclasses.parsing.InputParser;
 import com.bot.checklistbot.serviceclasses.parsing.InputParserBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Collections;
 
 /**
  * Команда, осуществляющая добавление списка пользователя
@@ -29,7 +28,7 @@ public class AddChecklistCommand implements BotCommand {
             .bindToStartOfLine()
             .addElement(TITLE)
             .optionalPart()
-            .addDelimiter(",")
+            .addDelimiter(Commands.DELIMITER)
             .addElement(CAPTION)
             .build();
 

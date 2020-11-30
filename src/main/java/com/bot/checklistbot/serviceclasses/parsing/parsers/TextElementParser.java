@@ -7,7 +7,7 @@ import com.bot.checklistbot.serviceclasses.parsing.ChainParsersHandler;
  * Парсер для извлекаемой части строки. Извлекаемая часть маркируется именем
  */
 public class TextElementParser implements ChainElement {
-    private static final String TEMPLATE = "(?<%s>[a-zA-Zа-яА-ЯёЁ0-9 ]+)";
+    private static final String TEMPLATE = "(?<%s>[a-zA-Zа-яА-ЯёЁ0-9 */,]+)";
     private final String elementName;
 
     public TextElementParser(String elementName) {

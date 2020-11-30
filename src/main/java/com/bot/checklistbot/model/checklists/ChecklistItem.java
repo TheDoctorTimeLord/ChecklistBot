@@ -20,13 +20,19 @@ public class ChecklistItem
     private String capture;
     @Column
     private boolean state;
+    @Column
+    private boolean hasSchedule;
+    @Column
+    private String schedule;
 
 
     public ChecklistItem() {}
 
-    public ChecklistItem(String capture) {
+    public ChecklistItem(String capture, String schedule, boolean hasSchedule) {
         this.capture = capture;
         this.state = true;
+        this.schedule = schedule;
+        this.hasSchedule = hasSchedule;
     }
 
     public long getId() {
@@ -55,5 +61,17 @@ public class ChecklistItem
 
     public void setChecklist(Checklist checklist) {
         this.checklist = checklist;
+    }
+
+    public boolean hasSchedule() {
+        return hasSchedule;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 }
