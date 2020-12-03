@@ -64,6 +64,10 @@ public class LocalizedText {
         return "Пункт: " + capture;
     }
 
+    public static String notifyItemActive(String capture) {
+        return capture + " снова активен";
+    }
+
     public static String stateChecklistItem(boolean state) {
         return "Состояние: " + (state ? "активен" : "не активен");
     }

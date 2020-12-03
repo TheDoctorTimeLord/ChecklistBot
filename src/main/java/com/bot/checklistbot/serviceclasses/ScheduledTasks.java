@@ -1,7 +1,11 @@
 package com.bot.checklistbot.serviceclasses;
 
+import com.bot.checklistbot.bot.BotResponse;
+import com.bot.checklistbot.bot.TelegramBot;
+import com.bot.checklistbot.model.checklists.Checklist;
 import com.bot.checklistbot.model.checklists.ChecklistItem;
 import com.bot.checklistbot.model.checklists.ChecklistItemService;
+import com.bot.checklistbot.model.userstate.UserData;
 import com.cronutils.model.Cron;
 import com.cronutils.model.CronType;
 import com.cronutils.model.definition.CronDefinition;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 
 import static com.bot.checklistbot.serviceclasses.Constants.Schedule.TIME_ZONE;
 
@@ -24,11 +29,13 @@ public class ScheduledTasks {
 
     private final ChecklistItemService service;
     private final CronParser parser;
+    private final TelegramBot telegramBot;
 
     @Autowired
-    public ScheduledTasks(ChecklistItemService service)
+    public ScheduledTasks(ChecklistItemService service, TelegramBot telegramBot)
     {
         this.service = service;
+        this.telegramBot = telegramBot;
         CronDefinition cronDefinition = CronDefinitionBuilder.instanceDefinitionFor(CronType.UNIX);
         parser = new CronParser(cronDefinition);
     }
@@ -48,6 +55,17 @@ public class ScheduledTasks {
 
             checklistItem.setState(true);
             service.save(checklistItem);
+            telegramBot.sendNotification(createNotification(checklistItem));
         }
+    }
+
+    private BotResponse createNotification(ChecklistItem checklistItem) {
+        Checklist checklist = checklistItem.getChecklist();
+        UserData userData = checklist.getOwner();
+
+        return new BotResponse(
+                userData.getId(),
+                Collections.singletonList(LocalizedText.notifyItemActive(checklistItem.getCapture())),
+                true);
     }
 }

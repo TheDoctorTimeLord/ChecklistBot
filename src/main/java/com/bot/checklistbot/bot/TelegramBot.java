@@ -1,10 +1,6 @@
 package com.bot.checklistbot.bot;
 
-import static com.bot.checklistbot.serviceclasses.Constants.Bot.STRING_DELIMITER;
-import static com.bot.checklistbot.serviceclasses.Constants.Bot.TIMEOUT;
-
-import javax.annotation.PostConstruct;
-
+import com.bot.checklistbot.handling.RequestHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +15,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
-import com.bot.checklistbot.handling.RequestHandler;
+import javax.annotation.PostConstruct;
+
+import static com.bot.checklistbot.serviceclasses.Constants.Bot.STRING_DELIMITER;
+import static com.bot.checklistbot.serviceclasses.Constants.Bot.TIMEOUT;
 
 /**
  * Класс, описывающий telegram бота. Регулирует его запуск
@@ -68,6 +67,16 @@ public class TelegramBot extends TelegramLongPollingBot {
         BotMessage message = new BotMessage(update.getMessage().getChatId(), update.getMessage().getText());
         BotResponse response = handler.handle(message);
         SendMessage responseToSend = mapResponse(response);
+
+        try {
+            execute(responseToSend);
+        } catch (TelegramApiException e) {
+            LOG.error("Message not send", e);
+        }
+    }
+
+    public void sendNotification(BotResponse botResponse) {
+        SendMessage responseToSend = mapResponse(botResponse);
 
         try {
             execute(responseToSend);
