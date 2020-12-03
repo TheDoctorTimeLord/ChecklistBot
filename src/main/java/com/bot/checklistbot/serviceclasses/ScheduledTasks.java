@@ -53,6 +53,9 @@ public class ScheduledTasks {
             if (!executionTime.isMatch(now))
                 continue;
 
+            if (checklistItem.isState())
+                continue;
+
             checklistItem.setState(true);
             service.save(checklistItem);
             telegramBot.sendNotification(createNotification(checklistItem));
